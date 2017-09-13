@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+</head>
+
+<body>
+    <h1>
+        <%= title %>
+    </h1>
+    <p>Welcome to
+        <%= title %>
+    </p>
+    <div>
+        <form action="/company" method="post">
+            <label for="name">Company name</label><br>
+            <input type="text" name="name" id="" /><br>
+            <label for="noOfEmployees">No. of Employees</label><br>
+            <input type="number" name="numberOfEmployees" id="" />
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+
 </html>

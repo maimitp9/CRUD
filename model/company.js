@@ -3,37 +3,38 @@ var mongoose = require('mongoose'),
 
 // ─── MODULE COMPANY ─────────────────────────────────────────────────────────────
 var CompanySchema = new Schema({
-    name: {type: String},
-    numberOfEmployees: {type: Number}
+    name: { type: String },
+    numberOfEmployees: { type: Number }
 });
 
 CompanySchema.statics = {
 
     // ─── FIND ONE COMPANY ───────────────────────────────────────────────────────────
-    get: function(query, callback){
+    get: function(query, callback) {
         this.findOne(query, callback)
     },
 
     // ─── FIND COMPANIES ─────────────────────────────────────────────────────────────
-    getAll: function(query, callback){
+    getAll: function(query, callback) {
         this.find(query, callback)
     },
 
     // ─── UPDATE BY ID ───────────────────────────────────────────────────────────────
-    updateById: function(id, updateData, callback){
-        this.update(id, {$set: updateData}, callback)
+    updateById: function(id, updateData, callback) {
+        this.update(id, { $set: updateData }, callback)
     },
 
     // ─── REMOVE ─────────────────────────────────────────────────────────────────────
-    remove: function(removeData, callback){
+    remove: function(removeData, callback) {
         this.remove(removeData, callback)
     },
 
     // ─── CREATE ─────────────────────────────────────────────────────────────────────
-    create: function(data, callback){
+    create: function(data, callback) {
         var company = new this(data);
+        console.log(company)
         company.save(callback)
-    }    
+    }
 }
 
 var company = mongoose.model('company', CompanySchema);
@@ -42,4 +43,3 @@ var company = mongoose.model('company', CompanySchema);
 module.exports = {
     Company: company
 }
-    
