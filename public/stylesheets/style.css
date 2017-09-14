@@ -1,8 +1,25 @@
 body {
-  padding: 50px;
+  padding: 0 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #E1EFF5;
 }
 
+h1{
+  text-transform: uppercase;
+  color: #2E2B2B;
+}
+
+h3{
+  text-transform: uppercase;
+  color: #2E2B2B;
+}
 a {
-  color: #00B7FF;
+  color: #7233A7;
+}
+
+ul li{
+  color: #000;
+}
+li{
+  margin-left: 50px;
 }

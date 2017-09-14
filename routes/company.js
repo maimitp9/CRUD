@@ -8,6 +8,9 @@ var Company = require('../controllers/companyController')
 module.exports = (router) => {
   router.post('/company', Company.create),
   router.get('/company/:id', Company.get),
-  router.put('/company/:id', Company.update),
-  router.delete('/company/:id', Company.delete)
+  router.post('/update-company/:id', Company.update),
+  router.delete('/company/:id', Company.delete),
+  router.get('/companies', Company.getAllCopanies),
+  router.get('/newCompany', Company.new),
+  router.get('/editCompany/:id', Company.get)
 }
