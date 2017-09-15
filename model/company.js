@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
 // ─── MODULE COMPANY ─────────────────────────────────────────────────────────────
 var CompanySchema = new Schema({
     name: { type: String },
-    numberOfEmployees: { type: Number }
+    numberOfEmployees: { type: Number },
+    users: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
 CompanySchema.statics = {
@@ -21,7 +22,7 @@ CompanySchema.statics = {
 
     // ─── UPDATE BY ID ───────────────────────────────────────────────────────────────
     updateById: function(id, updateData, callback) {
-        this.update({_id: id},{$set: updateData}, callback)
+        this.update({ _id: id }, { $set: updateData }, callback)
     },
 
     // ─── REMOVE ─────────────────────────────────────────────────────────────────────
@@ -36,7 +37,7 @@ CompanySchema.statics = {
     }
 }
 
-var company = mongoose.model('company', CompanySchema);
+var company = mongoose.model('Company', CompanySchema);
 
 // ─── EXPORT SCHEMA ──────────────────────────────────────────────────────────────
 module.exports = {

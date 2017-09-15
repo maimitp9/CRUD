@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
+
 <body>
-  <h1>Company List</h1><a href="/company/new">New Company</a>  
-  <ul>
-    <% data.forEach( (company,i) => { %>
-      <h3>Company <%= ++i %>
-        <a href='company/<%= company.id %>'>show</a>
-        <a href="/company/<%= company.id %>/edit">Edit</a>
-        <a href="/company/<%= company.id %>?_method=DELETE">Delete</a>
-      </h3>
-      <li>Comaany Name : <%= company.name %></li>
-      <li>Number Of Employees : <%= company.numberOfEmployees %></li>      
-    <% })%>
-  </ul>
+    <h1>Company List</h1><a href="/company/new">New Company</a>
+    <ul>
+        <% data.forEach( (company,i) => { %>
+            <h3>Company
+                <%= ++i %>
+                    <a href='company/<%= company.id %>'>show</a>
+                    <a href='/company/<%= company.id %>/edit'>Edit</a>
+                    <a href='/company/<%= company.id %>?_method=DELETE'>Delete</a>
+                    <a href='/user/<%= company.id %>/new'>New User</a>
+            </h3>
+            <li>Comaany Name :
+                <%= company.name %>
+            </li>
+            <li>Number Of Employees :
+                <%= company.numberOfEmployees %>
+            </li>
+            <% })%>
+    </ul>
 </body>
+
 </html>
