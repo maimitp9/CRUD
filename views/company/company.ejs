@@ -8,10 +8,14 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-  <h1>Company List</h1><a href="/newCompany">New Company</a>  
+  <h1>Company List</h1><a href="/company/new">New Company</a>  
   <ul>
     <% data.forEach( (company,i) => { %>
-      <h3>Company <%= ++i %><a href='company/<%= company.id %>'>show</a></h3>
+      <h3>Company <%= ++i %>
+        <a href='company/<%= company.id %>'>show</a>
+        <a href="/company/<%= company.id %>/edit">Edit</a>
+        <a href="/company/<%= company.id %>?_method=DELETE">Delete</a>
+      </h3>
       <li>Comaany Name : <%= company.name %></li>
       <li>Number Of Employees : <%= company.numberOfEmployees %></li>      
     <% })%>

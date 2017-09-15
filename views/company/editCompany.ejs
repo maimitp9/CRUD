@@ -9,9 +9,7 @@
 </head>
 <body>
   <h1>Edit Company</h1>
-  <%= data %>
-  <form action="/update-company/<%= data.id %>" method="POST">
-    <input type="hidden" name="_method" value="PUT"/>
+  <form action="/company/<%= data.id %>/update" method="POST">
     <label for="name">Company name</label><br>
     <input type="text" name="name" value="<%= data.name %>" id="" placeholder="Enter company name" /><br>
     <label for="noOfEmployees">No. of Employees</label><br>

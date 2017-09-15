@@ -21,18 +21,17 @@ CompanySchema.statics = {
 
     // ─── UPDATE BY ID ───────────────────────────────────────────────────────────────
     updateById: function(id, updateData, callback) {
-        this.update(id, { $set: updateData }, callback)
+        this.update({_id: id},{$set: updateData}, callback)
     },
 
     // ─── REMOVE ─────────────────────────────────────────────────────────────────────
-    remove: function(removeData, callback) {
+    removeById: function(removeData, callback) {
         this.remove(removeData, callback)
     },
 
     // ─── CREATE ─────────────────────────────────────────────────────────────────────
     create: function(data, callback) {
         var company = new this(data);
-        console.log(company)
         company.save(callback)
     }
 }

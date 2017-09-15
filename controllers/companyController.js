@@ -4,7 +4,7 @@ var Company = require('../model/company').Company
 exports.getAllCopanies = (req, res) => {
     Company.getAll({},(err, result) => {
         if(!err){
-            res.render('company',{data: result})
+            res.render('company/company',{data: result})
         }else{
             res.send(err); // 500 error            
         }
@@ -14,12 +14,12 @@ exports.getAllCopanies = (req, res) => {
 // ─── NEW COMPANY PAGE ───────────────────────────────────────────────────────────
 
 exports.new = (req, res) => {
-    res.render('newCompany')
+    res.render('company/newCompany')
 }
 
 // ─── EDIT COMPANY FORM ──────────────────────────────────────────────────────────
 exports.edit = (req, res) =>{
-    res.render('editCompany')
+    res.render('compant/editCompany')
 }
 
 /** create function to create Company. */
@@ -39,9 +39,9 @@ exports.get = function(req, res) {
     Company.get({ _id: req.params.id }, function(err, result) {
         if (!err) {
             if(req.route.path === "/company/:id"){ // return which we have defined in route
-                res.render('showCompany',{data: result});
+                res.render('company/showCompany',{data: result});
             }else{
-                res.render('editCompany', {data: result})
+                res.render('company/editCompany', {data: result})
             }
         } else {
             res.send(err); // 500 error
@@ -51,7 +51,6 @@ exports.get = function(req, res) {
 
 /** updateCompany function to get Company by id. */
 exports.update = function(req, res) {
-    console.log("yeah i am inside")
     Company.updateById(req.params.id, req.body, function(err, result) {
         if (!err) {
             return res.redirect(`/company/${req.params.id}`)
@@ -65,7 +64,7 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
     Company.removeById({ _id: req.params.id }, function(err, result) {
         if (!err) {
-            return res.json(result);
+            return res.redirect('/companies');
         } else {
             console.log(err);
             return res.send(err); // 500 error

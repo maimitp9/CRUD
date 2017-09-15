@@ -10,7 +10,7 @@ var router = express.Router();
 var db = require('./config/db');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var users = require('./routes/users')(router);
 var company = require('./routes/company')(router);
 
 var app = express();
@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+// app.use('/users', users);
 app.use(router);
 
 // catch 404 and forward to error handler
