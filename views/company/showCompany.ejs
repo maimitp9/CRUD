@@ -9,8 +9,22 @@
 </head>
 <body>
     <h1>Company Profile</h1>
+    <hr>
     <p><strong>Company Name : </strong><%= data.name %></p>
-    <p><strong>Number of Employees : </strong><%= data.numberOfEmployees %></p>    
-    <a href="/company/<%= data.id %>/edit">Edit Cpmpany</a>
+    <p><strong>Number of Employees : </strong><%= data.numberOfEmployees %></p>
+    <a href="/company/<%= data.id %>/edit">Edit Cpmpany</a><br>
+    <hr>
+
+    <h1>Company User List</h1>
+    <ul>
+      <% data.users.forEach( (user, i) => {%>
+        <h3>User <%= ++i %> <a href="/user/<%= user.id %>/delete?_method=DELETE">Delete</a></h3>
+        <% gender = user.gender === "1" ? "Male" : "Female" %>
+        <li><strong>Full Name: </strong><%= user.fname + " " + user.lname %></li>
+        <li><strong>Gender: </strong><%= gender %></li>
+        <li><strong>Address: </strong><p> <%= user.address %> </p></li>
+        <li><strong>Profile Picture:</strong><p><img src="/uploads/<%= user.filename %>" alt="profile picure"></p></li>
+      <% }) %>
+    </ul>
 </body>
 </html>

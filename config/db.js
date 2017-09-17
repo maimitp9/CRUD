@@ -13,7 +13,7 @@ var mongoose = require('mongoose');
 
 //Set up default mongoose connection
 var mongoDB = 'mongodb://127.0.0.1/mydb';
-mongoose.connect(mongoDB);
+mongoose.connect(mongoDB,{ useMongoClient: true });
 
 //Get the default connection
 var db = mongoose.connection;

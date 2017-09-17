@@ -1,7 +1,7 @@
-var User = require('../model/user').User
-var Company = require('../model/company').Company
+var {User, deleteFile } = require('../model/user');
+var Company = require('../model/company').Company;
 
-// all user 
+// all user
 exports.getAllUsers = (req, res) => {
     // User.getAllUsers({}, (err, result) => {
     User.find({}).populate('company').exec((err, result) => {
@@ -11,35 +11,27 @@ exports.getAllUsers = (req, res) => {
             res.send(err);
         }
     })
-    //     if (!err) {
-    //         res.render('users/users', { users: result });
-    //     } else {
-    //         res.send(err);
-    //     }
-    // })
 }
 
 // new user path
 exports.newUser = (req, res) => {
-    res.render('users/newUser', { company: req.params.company_id });
+  res.render('users/newUser', { company: req.params.company_id });
 }
-
 // create new user
 exports.createUser = (req, res) => {
-    Company.get({ _id: req.body.company }, function(err, company_result) {
-        if (!err) {
-            User.create(req.body, company_result, (err, result) => {
-                if (!err) {
-                    return res.redirect('/users')
-                } else {
-                    res.send(err)
-                }
-            })
-        } else {
-            res.send(err); // 500 error
-        }
-    });
-
+  Company.findById({ _id: req.body.company }, function(err, company_result) {
+      if (!err) {
+          User.create(req.body, req.file, company_result, (err, result) => {
+              if (!err) {
+                  return res.redirect('/companies')
+              } else {
+                  res.send(err)
+              }
+          })
+      } else {
+          res.send(err); // 500 error
+      }
+  });
 }
 
 // return single user json
@@ -50,5 +42,21 @@ exports.getUser = (req, res) => {
         } else {
             res.send(err)
         }
+    })
+}
+
+// delete user
+exports.delete = (req, res) => {
+    User.getUser({ _id: req.params.id}, (err, user) => {
+        user.remove( (err, result) => {
+            deleteFile(result.path, (err)=>{
+                if (err) throw err;
+            })
+            if(!err){
+                res.redirect(`/company/${result.company}`)
+            }else{
+                res.send(err);
+            }
+        })
     })
 }

@@ -10,17 +10,24 @@
 
 <body>
     <h1>New User</h1>
-    <form action="/user/create" method="POST">
+    <form action="/user/create" enctype="multipart/form-data" method="POST">
         <input type="hidden" name="company" value='<%= company %>'>
+
         <label for="fname">First Name:</label><br>
         <input type="text" name="fname" id="" placeholder="First Name" /><br>
+
         <label for="lname">Last Name: </label><br>
         <input type="text" name="lname" id="" placeholder="Last Name" /><br>
+
         <label for="gander">Gender</label><br>
         <label for="male"><input type="radio" name="gender" id="" value="1">Male</label><br>
         <label for="female"><input type="radio" name="gender" id="" value="0">Female</label><br>
+
+        <label for="avatat">Profile Picture: </label><input type="file" name="avatar" id=""><br>
+
         <label for="address">Address</label><br>
         <textarea name="address" id="" cols="30" rows="10" placeholder="Enter Your Address"></textarea><br>
+
         <button type="submit">Submit</button>
     </form>
 </body>

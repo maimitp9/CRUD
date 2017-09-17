@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Company = require('../controllers/companyController')
-
+  
 //
 // ─── API SERVER END POINT ───────────────────────────────────────────────────────
 //

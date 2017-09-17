@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Users Listt</title>
+    <title>Users List</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
     <h1>User List</h1>
-        <a href="/user/new">New User</a>
-        <a href="/user/1/profile"> Show User</a>
+        <!-- <a href="/user/new">New User</a> -->
         <ul>
             <% users.forEach( (user, i) => { %>
                 <h3>User
                     <%= ++i %>
+                    <a href="/user/<%= user.id %>/profile"> Show User</a>
                 </h3>
                 <li>Company Name: <%= user.company.name %></li>
                 <li>Name :

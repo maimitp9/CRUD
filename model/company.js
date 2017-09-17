@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
+var User = require('../model/user.js').User;
 
 // ─── MODULE COMPANY ─────────────────────────────────────────────────────────────
 var CompanySchema = new Schema({
@@ -8,10 +9,15 @@ var CompanySchema = new Schema({
     users: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
+CompanySchema.pre('remove', function(next) {
+    this.model('User').remove( {company: this._id}, next );
+})
+
+
 CompanySchema.statics = {
 
     // ─── FIND ONE COMPANY ───────────────────────────────────────────────────────────
-    get: function(query, callback) {
+    findById: function(query, callback) {
         this.findOne(query, callback)
     },
 
@@ -22,12 +28,7 @@ CompanySchema.statics = {
 
     // ─── UPDATE BY ID ───────────────────────────────────────────────────────────────
     updateById: function(id, updateData, callback) {
-        this.update({ _id: id }, { $set: updateData }, callback)
-    },
-
-    // ─── REMOVE ─────────────────────────────────────────────────────────────────────
-    removeById: function(removeData, callback) {
-        this.remove(removeData, callback)
+        this.findOneAndUpdate({ _id: id }, { $set: updateData },{ new: true}, callback)
     },
 
     // ─── CREATE ─────────────────────────────────────────────────────────────────────
