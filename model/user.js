@@ -37,12 +37,14 @@ UserSchema.statics = {
     },
 
     create: function(data, avatar, company, callback) {
-        data["fieldname"] = avatar.fieldname
-        data["encoding"] = avatar.encoding
-        data["mimeptype"] = avatar.mimetype
-        data["filename"] = avatar.filename
-        data["path"] = avatar.path
-        data["size"] = avatar.size
+        if(avatar){
+            data["fieldname"] = avatar.fieldname
+            data["encoding"] = avatar.encoding
+            data["mimeptype"] = avatar.mimetype
+            data["filename"] = avatar.filename
+            data["path"] = avatar.path
+            data["size"] = avatar.size
+        }
         var user = new this(data);
         
         user.save((err) => {
@@ -51,6 +53,20 @@ UserSchema.statics = {
             company.save()
             user.save(callback);
         })
+    },
+
+    // update user
+    updateById: function(id, data, avatar, callback){
+        if (avatar) {
+            data["fieldname"] = avatar.fieldname
+            data["encoding"] = avatar.encoding
+            data["mimeptype"] = avatar.mimetype
+            data["filename"] = avatar.filename
+            data["path"] = avatar.path
+            data["size"] = avatar.size
+        }
+        
+        this.findOneAndUpdate({ _id: id }, { $set: data }, { new: true }, callback)
     },
 
     // find one user
