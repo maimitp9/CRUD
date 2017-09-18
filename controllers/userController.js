@@ -6,7 +6,8 @@ exports.getAllUsers = (req, res) => {
     // User.getAllUsers({}, (err, result) => {
     User.find({}).populate('company').exec((err, result) => {
         if (!err) {
-            res.render('users/users', { users: result });
+            res.status(200).send(result)
+            // res.render('users/users', { users: result });
         } else {
             res.send(err);
         }
@@ -23,7 +24,8 @@ exports.createUser = (req, res) => {
       if (!err) {
           User.create(req.body, req.file, company_result, (err, result) => {
               if (!err) {
-                  return res.redirect('/companies')
+                res.status(200).send(result)
+                //return res.redirect('/companies')
               } else {
                   res.send(err)
               }
@@ -38,7 +40,8 @@ exports.createUser = (req, res) => {
 exports.getUser = (req, res) => {
     User.getUser({ _id: req.params.id }, (err, result) => {
         if (!err) {
-            res.render('users/showUser', { user: result })
+            res.status(200).send(result)
+            // res.render('users/showUser', { user: result })
         } else {
             res.send(err)
         }
@@ -53,7 +56,8 @@ exports.delete = (req, res) => {
                 if (err) throw err;
             })
             if(!err){
-                res.redirect(`/company/${result.company}`)
+                res.status(200).send(user)
+                // res.redirect(`/company/${result.company}`)
             }else{
                 res.send(err);
             }

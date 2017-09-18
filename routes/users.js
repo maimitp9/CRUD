@@ -8,6 +8,7 @@ var storage = multer.diskStorage({
         callback(null, './public/uploads/')
     },
     filename: function(req, file, callback){
+        console.log("gfgfgfg-----------------------")
         var originalname = file.originalname
         var extension = originalname.split(".");
         filename = extension[0] + '_' + Date.now() + '.' + extension[extension.length-1];;

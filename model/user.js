@@ -5,6 +5,7 @@ var fs = require('fs');
 var UserSchema = new Schema({
     fname: { type: String },
     lname: { type: String },
+    email: { type: String },
     gender: { type: String }, // 1= male, 0=female
     phone: { type: String },
     address: { type: String },
@@ -43,10 +44,12 @@ UserSchema.statics = {
         data["path"] = avatar.path
         data["size"] = avatar.size
         var user = new this(data);
+        
         user.save((err) => {
             if (err) throw err;
             company.users.push(user);
-            company.save(callback);
+            company.save()
+            user.save(callback);
         })
     },
 
