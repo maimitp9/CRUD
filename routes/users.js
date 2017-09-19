@@ -8,7 +8,6 @@ var storage = multer.diskStorage({
         callback(null, './public/uploads/')
     },
     filename: function(req, file, callback){
-        console.log("gfgfgfg-----------------------")
         var originalname = file.originalname
         var extension = originalname.split(".");
         filename = extension[0] + '_' + Date.now() + '.' + extension[extension.length-1];;
@@ -34,6 +33,7 @@ module.exports = (router) => {
     router.get('/user/:id/profile', User.getUser) // get single requested user
     router.get('/user/:company_id/new', User.newUser) // new user
     router.post('/user/create',upload.single('avatar'), User.createUser) // create User
+    router.post('/user/:id/update', upload.single('avatar'), User.updateUser) // create User 
     router.delete('/user/:id/delete', User.delete) // delete user
 
 }

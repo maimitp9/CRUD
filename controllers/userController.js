@@ -24,7 +24,7 @@ exports.createUser = (req, res) => {
       if (!err) {
           User.create(req.body, req.file, company_result, (err, result) => {
               if (!err) {
-                res.status(200).send(result)
+                res.status(200).send({user: result, "success" : true})
                 //return res.redirect('/companies')
               } else {
                   res.send(err)
@@ -48,13 +48,40 @@ exports.getUser = (req, res) => {
     })
 }
 
+//update User
+exports.updateUser = (req, res) => {
+    User.getUser({ _id: req.params.id }, (err, oldUser) => {
+        if (!err) {
+            User.updateById(req.params.id, req.body, req.file, (err, result) => {
+                if(req.file && oldUser.path){
+                    deleteFile(oldUser.path, (err) => {
+                        if (err) throw err;
+                    })
+                }
+                if (!err) {
+                    res.status(200).send(result)
+                }
+                else {
+                    res.send(err)
+                }
+            })
+            // res.render('users/showUser', { user: result })
+        } else {
+            res.send(err)
+        }
+    })
+    
+}
+
 // delete user
 exports.delete = (req, res) => {
     User.getUser({ _id: req.params.id}, (err, user) => {
         user.remove( (err, result) => {
-            deleteFile(result.path, (err)=>{
-                if (err) throw err;
-            })
+            if(result.path){
+                deleteFile(result.path, (err)=>{
+                    if (err) throw err;
+                })
+            }
             if(!err){
                 res.status(200).send(user)
                 // res.redirect(`/company/${result.company}`)
