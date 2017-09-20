@@ -55,11 +55,11 @@ exports.updateUser = (req, res) => {
             User.updateById(req.params.id, req.body, req.file, (err, result) => {
                 if(req.file && oldUser.path){
                     deleteFile(oldUser.path, (err) => {
-                        if (err) throw err;
+                        if (err) console.log(err);
                     })
                 }
                 if (!err) {
-                    res.status(200).send(result)
+                    res.status(200).send({ user: result, success: true })
                 }
                 else {
                     res.send(err)
