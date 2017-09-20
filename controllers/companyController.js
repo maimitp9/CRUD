@@ -28,7 +28,7 @@ exports.create = function(req, res) {
     console.log(req.body)
     Company.create(req.body, function(err, result) {
         if (!err) {
-            res.status(200).send(result)
+            res.status(200).send({ company: result, success: true })
            // return res.redirect('/companies');           
         } else {
             return res.send(err); // 500 error
