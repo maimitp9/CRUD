@@ -59,7 +59,7 @@ exports.get = function(req, res) {
 exports.update = function(req, res) {
     Company.updateById(req.params.id, req.body, function(err, result) {
         if (!err) {
-            res.status(200).send(result)
+            res.status(200).send({ company: result, success: true })
           //  return res.redirect(`/company/${req.params.id}`)
         } else {
             return res.send(err); // 500 error
