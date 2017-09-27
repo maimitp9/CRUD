@@ -6,7 +6,7 @@ var User = require('../model/user.js').User;
 var CompanySchema = new Schema({
     name: { type: String },
     numberOfEmployees: { type: Number },
-    users: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+    users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
 CompanySchema.pre('remove', function(next) {

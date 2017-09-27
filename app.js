@@ -13,6 +13,7 @@ var db = require('./config/db');
 var index = require('./routes/index');
 var users = require('./routes/users')(router);
 var company = require('./routes/company')(router);
+var feedback = require('./routes/feedback')(router);
 
 var app = express();
 app.use(cors())
