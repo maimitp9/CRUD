@@ -11,6 +11,7 @@ exports.getAll = (req, res) =>{
 }
 
 exports.create = (req,res) => {
+  console.log(req.body)
   Feedback.createFeedback(req.body, function(err, result){
     if(!err){
       res.status(200).send({feedback: result, success: true})
@@ -23,7 +24,7 @@ exports.create = (req,res) => {
 exports.getFeedbackByCompany = (req, res) => {
   Feedback.getByCompany(req.body.company, function(err, result){
     if(!err){
-      res.status(200).send({feedback: result, seccuss: true})
+      res.status(200).send({feedback: result, success: true})
     }else{
       res.send(err);
     }
@@ -31,9 +32,9 @@ exports.getFeedbackByCompany = (req, res) => {
 }
 
 exports.getFeedbackByUser = (req, res) => {
-  Feedback.getByUser(req.body.user, (err, result) => {
+  Feedback.getByUser(req.body.user_id, (err, result) => {
     if(!err){
-      res.status(200).send({feedback: result, seccuss: true})
+      res.status(200).send({feedback: result, success: true})
     }else{
       res.send(err)
     }
