@@ -22,7 +22,7 @@ exports.create = (req,res) => {
 }
 
 exports.getFeedbackByCompany = (req, res) => {
-  Feedback.getByCompany(req.body.company, function(err, result){
+  Feedback.getByCompany(req.body.company_id, function(err, result){
     if(!err){
       res.status(200).send({feedback: result, success: true})
     }else{
