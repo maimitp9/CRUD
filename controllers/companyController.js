@@ -25,7 +25,6 @@ exports.edit = (req, res) =>{
 
 /** create function to create Company. */
 exports.create = function(req, res) {
-    console.log(req.body)
     Company.create(req.body, function(err, result) {
         if (!err) {
             res.status(200).send({ company: result, success: true })

@@ -20,7 +20,7 @@ FeedbackSchema.statics = {
   },
 
   getByCompany: function(company, callback){
-    this.find({company: company},callback)
+    this.find({company: company}).populate('user').exec(callback)
   },
 
   getByUser: function(user, callback){
