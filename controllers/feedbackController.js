@@ -11,7 +11,6 @@ exports.getAll = (req, res) =>{
 }
 
 exports.create = (req,res) => {
-  console.log(req.body)
   Feedback.createFeedback(req.body, function(err, result){
     if(!err){
       res.status(200).send({feedback: result, success: true})
