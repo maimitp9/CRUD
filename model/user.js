@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
+var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
 var fs = require('fs');
 
 var UserSchema = new Schema({
@@ -9,6 +11,9 @@ var UserSchema = new Schema({
     gender: { type: String }, // 1= male, 0=female
     phone: { type: String },
     address: { type: String },
+    password: {
+        type: String
+    },
 	fieldname: String,
     encoding: String,
     mimeptype: String,
@@ -46,6 +51,7 @@ UserSchema.statics = {
             data["size"] = avatar.size
         }
         var user = new this(data);
+        user.password = hashedPassword(user.password)
         
         user.save((err) => {
             if (err) throw err;
@@ -71,20 +77,32 @@ UserSchema.statics = {
 
     // find one user
     getUser: function(query, callback) {
-        this.findOne(query, callback)
-    }
+        this.findOne(query,{ password: 0 }, callback)
+    },
+
 }
 
 
-const deleteFile = (file, callback) =>{
+const deleteFile = (file, callback) => {
     fs.unlink(file, (err) =>{
        callback(err);
     })
 }
 
+// hash and save a password
+const hashedPassword = (password) => {
+    return bcrypt.hashSync(password, 10);
+ } 
+    // check a password
+const validPassword = (submittedPassword, hashedPassword) => {
+        console.log(submittedPassword, hashedPassword)
+        return bcrypt.compareSync(submittedPassword, hashedPassword);
+   } 
+
 var user = mongoose.model('User', UserSchema);
 
 module.exports = {
     User: user,
-    deleteFile
+    deleteFile,
+    validPassword
 }
