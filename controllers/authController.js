@@ -20,7 +20,7 @@ module.exports.login = (req, res) => {
   })
 }
 
-module.exports.authMe = (req, res) => {
+module.exports.getUserByAuth = (req, res) => {
   var token = req.headers['authorization']
   if(!token){
     return res.status(203).send({ authenticated: false, message: 'Token not providesd' })
